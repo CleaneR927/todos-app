@@ -1,0 +1,94 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 310px;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  margin: auto;
+  padding: 40px 40px 30px;
+  background-color: #42634a;
+  border-radius: 25px;
+  box-shadow:
+    0px 24px 32px rgba(0, 0, 0, 0.04),
+    0px 16px 24px rgba(0, 0, 0, 0.04),
+    0px 4px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal_enter {
+  opacity: 0;
+}
+
+.modal_enter_active {
+  opacity: 1;
+}
+
+.modal_exit_active {
+  opacity: 0;
+}
+
+.title {
+  font-size: 26px;
+  color: #c9c6c6;
+  justify-items: center;
+  align-self: center;
+  min-height: 28px;
+  margin: 0;
+  padding: 5px 25px;
+  text-align: center;
+}
+
+.button {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #c9c6c6;
+  transition: transform 0.3s ease;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
+
+.button__add {
+  position: relative;
+  inset: 0;
+  margin: 1vh auto;
+  width: fit-content;
+  height: auto;
+  border-radius: 25px;
+  padding: 5px 25px;
+  background-color: #c9c6c6;
+  color: #42634a;
+}
+
+.input {
+  font-family: inherit;
+  width: 100%;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  background-color: #c9c6c691;
+}
+
+textarea {
+  resize: none;
+  height: 15vh;
+}
+
+::placeholder {
+  color: #c9c6c6ad;
+  font-size: 1.3em;
+  line-height: 0.9em;
+}
