@@ -1,6 +1,7 @@
 {
   "name": "todos-app",
   "version": "0.1.0",
+  "homepage": "https://github.com/CleaneR927/todos-app",
   "private": true,
   "dependencies": {
     "react": "^18.3.1",
@@ -23,9 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,3 +45,4 @@
     ]
   }
 }
+
