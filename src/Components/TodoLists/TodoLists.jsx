@@ -6,7 +6,13 @@ import styles from './TodoLists.module.css';
 export function TodoLists() {
   const [todos, setTodos] = useState(() => {
     const localSorage = localStorage.getItem('todos');
-    return localSorage ? JSON.parse(localSorage) : '';
+    let parsedTodos = [];
+    try {
+      parsedTodos = localSorage ? JSON.parse(localSorage) : [];
+    } catch (error) {
+      console.error('Ошибка при парсинге todos из localStorage:', error);
+    }
+    return Array.isArray(parsedTodos) ? parsedTodos : [];
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { ModalOverlay } from '../ModalOverlay/ModalOverlay';
+import { ModalOverlay } from './ModalOverlay/ModalOverlay';
 import styles from './Modal.module.css';
 import { CgCloseO } from 'react-icons/cg';
 
