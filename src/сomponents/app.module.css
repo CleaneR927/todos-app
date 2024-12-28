@@ -1,0 +1,9 @@
+@import '../constants/variables.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--accent-color, #c9c6c6);
+  color: var(--main-color, #42634a);
+  min-height: 100vh;
+}

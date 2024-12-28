@@ -1,0 +1,25 @@
+@import '../../constants/variables.css';
+
+@media screen and (max-width: 500px) {
+  .container {
+    margin-block-start: 50px !important;
+  }
+  .title {
+    font-size: 24px !important;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+  margin: 70px auto 0;
+  max-width: 800px;
+}
+
+.title {
+  font-size: 26px;
+  align-self: center;
+  margin: 1vh 0;
+}

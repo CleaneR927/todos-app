@@ -1,0 +1,36 @@
+@import '../../../constants/variables.css';
+
+.switch__container {
+  position: absolute;
+  right: 2%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+  outline: 2px solid var(--accent-color, #ddd);
+  border-radius: 20px;
+  background-color: var(--accent-bc-color, #b1bab3);
+  color: var(--accent-color, #ddd);
+}
+
+.switch__container-active {
+  justify-content: end;
+  background-color: var(--accent-bc-color, #b1bab3);
+}
+
+.switch__button {
+  width: 30px;
+  height: 30px;
+  color: var(--main-color, #42634a);
+  border-radius: 50%;
+  background-color: var(--accent-bc-color, #b1bab3);
+  transition:
+    transform 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.switch__button_active {
+  background-color: var(--accent-bc-color, #b1bab3);
+}

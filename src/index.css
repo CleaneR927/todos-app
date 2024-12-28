@@ -1,3 +1,5 @@
+@import './constants/variables.css';
+
 * {
   position: relative;
   margin: 0;
@@ -17,7 +19,7 @@ button {
   font-size: 18px;
   font-weight: bold;
   font-family: inherit;
-  color: #42634a;
+  color: var(--main-color, #42634a);
   cursor: pointer;
   outline: none;
   border: none;
@@ -27,7 +29,7 @@ button {
 }
 
 button:hover {
-  box-shadow: #42634a79 0px 5px 30px;
+  box-shadow: 0px 5px 30px var(--hover-color, #42634a79);
 }
 
 button:active {
@@ -39,4 +41,19 @@ button:active {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+body::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--accent-bc-color, #b1bab3);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--main-color, #42634a);
+  border-radius: 20px;
+  border: 1px solid var(--accent-color, #ddd);
+  cursor: pointer;
 }

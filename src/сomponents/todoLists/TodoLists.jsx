@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Todo } from '../Todo/Todo';
-import { Modal } from '../Modal/Modal';
-import styles from './TodoLists.module.css';
+import { Todo } from '../todo/Todo';
+import { Modal } from '../modal/Modal';
+import styles from './todoLists.module.css';
+import { ModalFormCreate } from '../../ui-kit/modal/ModalFormCreate';
+import { ModalFormChange } from '../../ui-kit/modal/ModalFormChange';
+import { HeaderPage } from '../header/Header';
 
 export function TodoLists() {
   const [todos, setTodos] = useState(() => {
@@ -17,7 +20,8 @@ export function TodoLists() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-  const [newTodo, setNewTodo] = useState({ title: '', description: '' });
+  const [formAction, setFormAction] = useState('create');
+  const [currentTodo, setCurrentTodo] = useState(null);
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -25,68 +29,51 @@ export function TodoLists() {
 
   const handleOnCheck = (id) => {
     setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, completed: !todo.completed };
-        }
-        return todo;
-      })
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
     );
   };
 
-  const handleOnAdd = () => {
-    if (newTodo.title === '' || newTodo.description === '') {
-      alert('Заполните все поля');
-      return;
-    }
-    setTodos([
-      ...todos,
-      {
-        id: Math.random(),
-        title: newTodo.title,
-        description: newTodo.description,
-        completed: false
-      }
+  const handleOnAdd = (newTodo) => {
+    setTodos((prevTodos) => [
+      ...prevTodos,
+      { id: Math.random(), ...newTodo, completed: false }
     ]);
-    setNewTodo({ title: '', description: '' });
-    handleOnCloseModal();
+  };
+
+  const handleOnEdit = (updatedTodo) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
+    );
   };
 
   const handleOnDelete = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const handleOnInputChange = (event) => {
-    const { name, value } = event.target;
-    setNewTodo((prev) => ({ ...prev, [name]: value }));
+  const handleOnOpenModal = (action, todo = null) => {
+    setFormAction(action);
+    setCurrentTodo(todo);
+    setIsModalOpen(true);
+    setIsExiting(false);
+    setTimeout(() => setIsAnimating(true), 0);
   };
 
   const handleOnCloseModal = () => {
     setIsExiting(true);
     setTimeout(() => {
       setIsModalOpen(false);
+      setCurrentTodo(null);
       setIsExiting(false);
       setIsAnimating(false);
     }, 200);
   };
 
-  const handleOnOpenModal = () => {
-    setIsModalOpen(true);
-    setIsExiting(false);
-    setTimeout(() => setIsAnimating(true), 0);
-  };
-
   return (
     <div className={styles.container}>
+      <HeaderPage openModal={handleOnOpenModal} />
       <h2 className={styles.title}>Список моих дел</h2>
-      <button
-        type="button"
-        className={styles.button}
-        onClick={handleOnOpenModal}
-        aria-label="Добавить новое дело"
-      >
-        Добавить новое дело
-      </button>
       {todos.map((todo) => {
         return (
           <Todo
@@ -94,17 +81,26 @@ export function TodoLists() {
             todo={todo}
             handleOnCheck={handleOnCheck}
             handleOnDelete={handleOnDelete}
+            handleOnEdit={() => handleOnOpenModal('change', todo)}
           />
         );
       })}
       {isModalOpen && (
         <Modal
-          handleOnInputChange={handleOnInputChange}
-          handleOnAdd={handleOnAdd}
-          handleOnCloseModal={handleOnCloseModal}
+          onClose={handleOnCloseModal}
           isAnimating={isAnimating}
           isExiting={isExiting}
-        />
+        >
+          {formAction === 'create' ? (
+            <ModalFormCreate onAdd={handleOnAdd} onClose={handleOnCloseModal} />
+          ) : (
+            <ModalFormChange
+              todo={currentTodo}
+              onEdit={handleOnEdit}
+              onClose={handleOnCloseModal}
+            />
+          )}
+        </Modal>
       )}
     </div>
   );

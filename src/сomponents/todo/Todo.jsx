@@ -1,7 +1,7 @@
-import styles from './Todo.module.css';
-import { CgCloseO, CgCheck } from 'react-icons/cg';
+import styles from './todo.module.css';
+import { CgCloseO, CgCheck, CgPen } from 'react-icons/cg';
 
-export function Todo({ todo, handleOnCheck, handleOnDelete }) {
+export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
   if (!todo) {
     return null;
   }
@@ -27,6 +27,12 @@ export function Todo({ todo, handleOnCheck, handleOnDelete }) {
           {todo.completed ? 'Выполнено' : 'Не выполнено'}
         </span>
       </label>
+      <CgPen
+        type="button"
+        className={styles.button__edit}
+        onClick={handleOnEdit}
+        aria-label={`Редактировать задачу ${todo.title}`}
+      ></CgPen>
       <CgCloseO
         type="button"
         className={styles.button__delete}

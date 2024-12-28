@@ -1,0 +1,25 @@
+@import '../../constants/variables.css';
+
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 30px !important;
+  }
+}
+
+.header {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9900;
+  background-color: var(--main-color, #42634a);
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  color: var(--accent-color, #c9c6c6);
+  font-size: 40px;
+  padding: 5px 10px;
+}

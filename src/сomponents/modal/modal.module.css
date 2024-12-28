@@ -1,0 +1,64 @@
+@import '../../constants/variables.css';
+
+@media screen and (min-width: 550px) {
+  .modal {
+    min-width: 530px !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .modal {
+    min-width: clamp(19.6875rem, 0.9918rem + 93.4783vw, 33.125rem) !important;
+  }
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 500px;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  margin: auto;
+  padding: 40px 30px 30px;
+  background-color: var(--main-color, #42634a);
+  border-radius: 25px;
+  box-shadow:
+    0px 24px 32px var(--modal-bs-color, #0000000a),
+    0px 16px 24px var(--modal-bs-color, #0000000a),
+    0px 4px 8px var(--modal-bs-color, #0000000a),
+    0px 0px 1px var(--modal-bs-color, #0000000a);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal_enter_active {
+  opacity: 1;
+}
+
+.modal_exit_active {
+  opacity: 0;
+}
+
+.button {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--accent-color, #c9c6c6);
+  transition: transform 0.3s ease;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
+
+.overflow__hidden {
+  overflow: hidden;
+}

@@ -1,0 +1,93 @@
+@import '../../constants/variables.css';
+
+.title {
+  font-size: 26px;
+  color: var(--accent-color, #c9c6c6);
+  justify-items: center;
+  align-self: center;
+  min-height: 28px;
+  margin: 0;
+  padding: 5px 25px;
+  text-align: center;
+}
+
+.button {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: var(--accent-color, #c9c6c6);
+  transition: transform 0.3s ease;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
+
+.button__add {
+  position: relative;
+  inset: 0;
+  margin: 1vh auto;
+  width: fit-content;
+  height: auto;
+  border-radius: 25px;
+  padding: 5px 25px;
+  background-color: var(--accent-color, #c9c6c6);
+  color: var(--main-color, #42634a);
+}
+
+.button__disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.input {
+  position: relative;
+  margin-block-end: 0.7rem;
+  font-family: inherit;
+  width: 100%;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--main-input-color, #c9c6c691);
+}
+
+textarea {
+  resize: none;
+  height: 15vh;
+}
+
+::placeholder {
+  color: var(--accent-color, #c9c6c6);
+  font-size: 1.3em;
+  line-height: 0.9em;
+}
+
+.error {
+  outline: 1px solid #9e3c3c;
+}
+
+.errorMessage {
+  position: absolute;
+  left: 0.6em;
+  bottom: -1.3em;
+  height: 25px;
+  color: #9e3c3c;
+  font-size: 0.875em;
+  line-height: 0.9em;
+}
+
+.textCounter {
+  position: absolute;
+  right: 0.5em;
+  bottom: -2.6em;
+  height: 25px;
+  color: var(--accent-color, #c9c6c6);
+  font-size: 0.9em;
+  font-weight: 600;
+  line-height: 0.9em;
+}
