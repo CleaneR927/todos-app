@@ -68,7 +68,7 @@ textarea {
 }
 
 .error {
-  outline: 1px solid #9e3c3c;
+  outline: 1px solid var(--validation-color, #9e3c3c);
 }
 
 .errorMessage {
@@ -76,7 +76,7 @@ textarea {
   left: 0.6em;
   bottom: -1.3em;
   height: 25px;
-  color: #9e3c3c;
+  color: var(--validation-color, #9e3c3c);
   font-size: 0.875em;
   line-height: 0.9em;
 }

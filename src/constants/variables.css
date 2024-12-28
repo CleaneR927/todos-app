@@ -8,6 +8,7 @@
   --checkbox-color: #a75151;
   --overlay-color: #00000099;
   --modal-bs-color: #0000000a;
+  --validation-color: #9e3c3c;
 }
 
 /* @media (prefers-color-scheme: light) {
@@ -21,6 +22,7 @@
   --checkbox-color: #a75151;
   --overlay-color: #00000099;
   --modal-bs-color: #0000000a;
+  --validation-color: #9e3c3c;
   }
 }
 
@@ -35,5 +37,6 @@
   --checkbox-color: #a75151;
   --overlay-color: #00000099;
   --modal-bs-color: #0000000a;
+  --validation-color: #9e3c3c;
   }
 } */
