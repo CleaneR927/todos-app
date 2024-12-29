@@ -6,6 +6,24 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .gradient-bg {
+    animation: none;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .header {
   position: fixed;
   display: flex;
@@ -13,9 +31,18 @@
   left: 0;
   width: 100%;
   z-index: 9900;
-  background-color: var(--main-color, #42634a);
+  background: linear-gradient(
+    270deg,
+    var(--main-color, #42634a),
+    var(--hover-color, #42634a79),
+    var(--main-color, #42634a),
+    var(--hover-color, #42634a79),
+    var(--main-color, #42634a)
+  );
+  background-size: 600% 600%;
   justify-content: center;
   align-items: center;
+  animation: gradient-animation 25s ease infinite;
 }
 
 .title {

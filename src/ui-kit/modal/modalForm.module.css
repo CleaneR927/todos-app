@@ -30,7 +30,8 @@
 .button__add {
   position: relative;
   inset: 0;
-  margin: 1vh auto;
+  margin-inline: auto;
+  margin-block-start: 0.7rem;
   width: fit-content;
   height: auto;
   border-radius: 25px;

@@ -8,8 +8,14 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
 
   return (
     <div className={styles.item}>
-      <h3 className={styles.title}>{todo.title}</h3>
-      <p className={styles.description}>{todo.description}</p>
+      <div
+        className={styles.content}
+        onClick={handleOnEdit}
+        aria-label={`Редактировать задачу ${todo.title}`}
+      >
+        <h3 className={styles.title}>{todo.title}</h3>
+        <p className={styles.description}>{todo.description}</p>
+      </div>
       <label htmlFor={todo.id} className={styles.custom__checkbox}>
         <input
           type="checkbox"
@@ -27,12 +33,6 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
           {todo.completed ? 'Выполнено' : 'Не выполнено'}
         </span>
       </label>
-      <CgPen
-        type="button"
-        className={styles.button__edit}
-        onClick={handleOnEdit}
-        aria-label={`Редактировать задачу ${todo.title}`}
-      ></CgPen>
       <CgCloseO
         type="button"
         className={styles.button__delete}
