@@ -1,5 +1,6 @@
 :root {
   --main-color: #42634a;
+  --second-grad-color: #7ea187;
   --hover-color: #42634a79;
   --accent-color: #ffffff;
   --main-input-color: #c9c6c691;
@@ -9,27 +10,33 @@
   --overlay-color: #00000099;
   --modal-bs-color: #0000000a;
   --validation-color: #9e3c3c;
+  --odd-boll-color: #ff5733;
+  --even-boll-color: #ffc300;
 }
 
 /* @media (prefers-color-scheme: light) {
   :root {
   --main-color: #42634a;
-  --hv-color: #42634a79;
-  --accent-color: #ddd;
+  --second-grad-color: #7ea187;
+  --hover-color: #42634a79;
+  --accent-color: #ffffff;
   --main-input-color: #c9c6c691;
-  --accent-bc-color: #b1bab3;
+  --accent-bc-color: #c3c9c5;
   --border-color: #0000005d;
   --checkbox-color: #a75151;
   --overlay-color: #00000099;
   --modal-bs-color: #0000000a;
   --validation-color: #9e3c3c;
+  --odd-boll-color: #ff5733;
+  --even-boll-color: #ffc300;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
   --main-color: #42634a;
-  --hv-color: #42634a79;
+  --second-grad-color: #7ea187;
+  --hover-color: #42634a79;
   --accent-color: #ddd;
   --main-input-color: #c9c6c691;
   --accent-bc-color: #b1bab3;
@@ -38,5 +45,39 @@
   --overlay-color: #00000099;
   --modal-bs-color: #0000000a;
   --validation-color: #9e3c3c;
+  --odd-boll-color: #ff5733;
+  --even-boll-color: #ffc300;
   }
 } */
+
+[data-theme='light'] {
+  --main-color: #42634a;
+  --second-grad-color: #7ea187;
+  --hover-color: #42634a79;
+  --accent-color: #ffffff;
+  --main-input-color: #c9c6c691;
+  --accent-bc-color: #c3c9c5;
+  --border-color: #0000005d;
+  --checkbox-color: #a75151;
+  --overlay-color: #00000099;
+  --modal-bs-color: #0000000a;
+  --validation-color: #9e3c3c;
+  --odd-boll-color: #ff5733;
+  --even-boll-color: #ffc300;
+}
+
+[data-theme='dark'] {
+  --main-color: #463b46;
+  --second-grad-color: #161616;
+  --hover-color: #5041328a;
+  --accent-color: #9c9b94;
+  --main-input-color: #9b919191;
+  --accent-bc-color: #787579;
+  --border-color: #0000005d;
+  --checkbox-color: #8c578f;
+  --overlay-color: #0e090faf;
+  --modal-bs-color: #2f1e3046;
+  --validation-color: #9e3c3c;
+  --odd-boll-color: #af54bb;
+  --even-boll-color: #5db34c;
+}

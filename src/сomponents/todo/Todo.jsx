@@ -1,5 +1,5 @@
 import styles from './todo.module.css';
-import { CgCloseO, CgCheck, CgPen } from 'react-icons/cg';
+import { CgCloseO, CgCheck } from 'react-icons/cg';
 
 export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
   if (!todo) {

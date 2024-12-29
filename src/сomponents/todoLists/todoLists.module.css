@@ -6,6 +6,7 @@
   }
   .title {
     font-size: 24px !important;
+    margin-block-start: 2.5vh !important;
   }
 }
 

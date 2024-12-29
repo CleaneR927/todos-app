@@ -34,9 +34,9 @@
   background: linear-gradient(
     270deg,
     var(--main-color, #42634a),
-    var(--hover-color, #42634a79),
+    var(--second-grad-color, #7ea187),
     var(--main-color, #42634a),
-    var(--hover-color, #42634a79),
+    var(--second-grad-color, #7ea187),
     var(--main-color, #42634a)
   );
   background-size: 600% 600%;
