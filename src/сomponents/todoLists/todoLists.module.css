@@ -1,15 +1,5 @@
 @import '../../constants/variables.css';
 
-@media screen and (max-width: 500px) {
-  .container {
-    margin-block-start: 50px !important;
-  }
-  .title {
-    font-size: 24px !important;
-    margin-block-start: 2.5vh !important;
-  }
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -23,4 +13,14 @@
   font-size: 26px;
   align-self: center;
   margin: 1vh 0;
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    margin-block-start: 50px;
+  }
+  .title {
+    font-size: 24px;
+    margin-block-start: 2.5vh;
+  }
 }

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './modalForm.module.css';
 import clsx from 'clsx';
 import { useTodoValidation } from '../../hooks/useTodoValidation';
+import { RadioButton } from '../radioButton/RadioButton';
 
 export function ModalFormChange({ todo, onEdit, onClose }) {
   const {
@@ -12,12 +13,24 @@ export function ModalFormChange({ todo, onEdit, onClose }) {
     setTodo
   } = useTodoValidation();
 
+  const [priority, setPriority] = useState('Не важно');
+
   useEffect(() => {
     setTodo({
       title: todo.title || '',
-      description: todo.description || ''
+      description: todo.description || '',
+      priority: todo.priority || ''
     });
+    setPriority(todo.priority || 'Не важно');
   }, [todo, setTodo]);
+
+  const handlePriorityChange = (e) => {
+    setPriority(e.target.value);
+    setTodo((prevState) => ({
+      ...prevState,
+      priority: e.target.value
+    }));
+  };
 
   const handleOnSubmit = () => {
     if (todo && isFormValid) {
@@ -34,9 +47,9 @@ export function ModalFormChange({ todo, onEdit, onClose }) {
           className={clsx(styles.input, errors.title ? styles.error : '')}
           type="text"
           name="title"
-          value={updatedTodo.title || ''}
-          onChange={handleOnInputChange}
           placeholder="Введите название дела"
+          onChange={handleOnInputChange}
+          value={updatedTodo.title || ''}
         />
         {errors.title && (
           <div className={styles.errorMessage}>{errors.title}</div>
@@ -45,10 +58,11 @@ export function ModalFormChange({ todo, onEdit, onClose }) {
       <label>
         <textarea
           className={clsx(styles.input, errors.description ? styles.error : '')}
+          type="text"
           name="description"
-          value={updatedTodo.description || ''}
-          onChange={handleOnInputChange}
           placeholder="Введите описание дела"
+          onChange={handleOnInputChange}
+          value={updatedTodo.description || ''}
         />
         {errors.description && (
           <div className={styles.errorMessage}>{errors.description}</div>
@@ -57,6 +71,10 @@ export function ModalFormChange({ todo, onEdit, onClose }) {
           {updatedTodo.description.length} / 250
         </span>
       </label>
+      <RadioButton
+        priority={priority}
+        handlePriorityChange={handlePriorityChange}
+      />
       <button
         type="button"
         className={clsx(

@@ -12,43 +12,50 @@
   --validation-color: #9e3c3c;
   --odd-boll-color: #ff5733;
   --even-boll-color: #ffc300;
+
+  --rubber-todo-padding: clamp(0.9375rem, 0.1202rem + 3.8462vw, 1.5625rem);
+  --title-font-size: clamp(1rem, 0.6731rem + 1.5385vw, 1.25rem);
+  --description-font-size: clamp(0.875rem, 0.5481rem + 1.5385vw, 1.125rem);
+  --circle-button-size: clamp(1.25rem, 0.5962rem + 3.0769vw, 1.75rem);
+  --min-width-size: clamp(19.6875rem, 0.9918rem + 93.4783vw, 33.125rem);
+  --border-radius-size: 15px;
 }
 
-/* @media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) {
   :root {
-  --main-color: #42634a;
-  --second-grad-color: #7ea187;
-  --hover-color: #42634a79;
-  --accent-color: #ffffff;
-  --main-input-color: #c9c6c691;
-  --accent-bc-color: #c3c9c5;
-  --border-color: #0000005d;
-  --checkbox-color: #a75151;
-  --overlay-color: #00000099;
-  --modal-bs-color: #0000000a;
-  --validation-color: #9e3c3c;
-  --odd-boll-color: #ff5733;
-  --even-boll-color: #ffc300;
+    --main-color: #42634a;
+    --second-grad-color: #7ea187;
+    --hover-color: #42634a79;
+    --accent-color: #ffffff;
+    --main-input-color: #c9c6c691;
+    --accent-bc-color: #c3c9c5;
+    --border-color: #0000005d;
+    --checkbox-color: #a75151;
+    --overlay-color: #00000099;
+    --modal-bs-color: #0000000a;
+    --validation-color: #9e3c3c;
+    --odd-boll-color: #ff5733;
+    --even-boll-color: #ffc300;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-  --main-color: #42634a;
-  --second-grad-color: #7ea187;
-  --hover-color: #42634a79;
-  --accent-color: #ddd;
-  --main-input-color: #c9c6c691;
-  --accent-bc-color: #b1bab3;
-  --border-color: #0000005d;
-  --checkbox-color: #a75151;
-  --overlay-color: #00000099;
-  --modal-bs-color: #0000000a;
-  --validation-color: #9e3c3c;
-  --odd-boll-color: #ff5733;
-  --even-boll-color: #ffc300;
+    --main-color: #463b46;
+    --second-grad-color: #161616;
+    --hover-color: #5041328a;
+    --accent-color: #9c9b94;
+    --main-input-color: #9b919191;
+    --accent-bc-color: #787579;
+    --border-color: #0000005d;
+    --checkbox-color: #8c578f;
+    --overlay-color: #0e090faf;
+    --modal-bs-color: #2f1e3046;
+    --validation-color: #9e3c3c;
+    --odd-boll-color: #af54bb;
+    --even-boll-color: #5db34c;
   }
-} */
+}
 
 [data-theme='light'] {
   --main-color: #42634a;

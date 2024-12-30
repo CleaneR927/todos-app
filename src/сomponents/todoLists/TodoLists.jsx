@@ -37,8 +37,8 @@ export function TodoLists() {
 
   const handleOnAdd = (newTodo) => {
     setTodos((prevTodos) => [
-      ...prevTodos,
-      { id: Math.random(), ...newTodo, completed: false }
+      { id: Math.random(), ...newTodo, completed: false },
+      ...prevTodos
     ]);
   };
 

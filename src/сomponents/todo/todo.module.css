@@ -1,30 +1,5 @@
 @import '../../constants/variables.css';
 
-@media (max-width: 600px) {
-  .item {
-    padding: 10px clamp(0.9375rem, 0.1202rem + 3.8462vw, 1.5625rem) !important;
-  }
-
-  .title {
-    font-size: clamp(1rem, 0.6731rem + 1.5385vw, 1.25rem) !important;
-  }
-
-  .description {
-    font-size: clamp(0.875rem, 0.5481rem + 1.5385vw, 1.125rem) !important;
-  }
-
-  .custom__checkbox {
-    width: clamp(1.25rem, 0.5962rem + 3.0769vw, 1.75rem) !important;
-    height: clamp(1.25rem, 0.5962rem + 3.0769vw, 1.75rem) !important;
-  }
-
-  .button__delete {
-    font-size: clamp(1rem, 0.8365rem + 0.7692vw, 1.125rem) !important;
-    width: clamp(1.25rem, 0.5962rem + 3.0769vw, 1.75rem) !important;
-    height: clamp(1.25rem, 0.5962rem + 3.0769vw, 1.75rem) !important;
-  }
-}
-
 .content {
   cursor: pointer;
 }
@@ -33,20 +8,25 @@
   display: grid;
   grid-template-columns: 1fr auto auto;
   grid-template-rows: auto auto;
-  gap: 10px 20px;
+  gap: 5px 20px;
   align-items: center;
-  padding: 10px 25px;
+  padding: 10px 25px 10px 30px;
   border: 1px solid var(--border-color, #0000005d);
   border-radius: 25px;
   background-color: var(--accent-bc-color, #42634a49);
   margin: 0 20px;
   box-shadow: 0px 4px 10px var(--accent-bc-color, #42634a49);
+  cursor: pointer;
 }
 
 .description {
   grid-column: 1 / -1;
   grid-row: 2 / 3;
   font-size: 18px;
+}
+
+.no-description {
+  row-gap: 0;
 }
 
 .custom__checkbox input[type='checkbox'] {
@@ -104,6 +84,19 @@
   transform: scale(0.9);
 }
 
+.priority__container {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  left: calc(var(--rubber-todo-padding, 10px) / 4);
+  top: 12px;
+}
+
+.priority__icon {
+  width: inherit;
+  height: inherit;
+}
+
 .visuale_hidden {
   position: absolute;
   width: 1px;
@@ -115,4 +108,37 @@
   clip-path: inset(100%);
   clip: rect(0 0 0 0);
   overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .item {
+    padding-inline: calc(var(--rubber-todo-padding, 10px) + 0.5rem)
+      var(--rubber-todo-padding, 10px);
+    column-gap: 10px;
+  }
+
+  .title {
+    font-size: var(--title-font-size, 16px);
+  }
+
+  .description {
+    font-size: var(--description-font-size, 14px);
+  }
+
+  .custom__checkbox {
+    width: var(--circle-button-size, 20px);
+    height: var(--circle-button-size, 20px);
+  }
+
+  .button__delete {
+    width: var(--circle-button-size, 20px);
+    height: var(--circle-button-size, 20px);
+  }
+
+  .priority__container {
+    top: clamp(0.5625rem, 0.3482rem + 1.0714vw, 0.75rem);
+    left: calc(var(--rubber-todo-padding, 10px) / 3);
+    width: clamp(0.8rem, 0.5714rem + 1.1429vw, 1rem);
+    height: clamp(0.8rem, 0.5714rem + 1.1429vw, 1rem);
+  }
 }

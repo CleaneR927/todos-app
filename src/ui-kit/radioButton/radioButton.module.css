@@ -1,0 +1,50 @@
+@import '../../constants/variables.css';
+
+.radioContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 60px;
+  margin-top: var(--rubber-todo-padding, 10px);
+  margin-inline: auto;
+  border: none;
+}
+
+.radioItem {
+  display: none;
+}
+
+label:has(.radioItem) {
+  font-weight: 600;
+  color: var(--accent-color, #c9c6c6);
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+  user-select: none; /* Запрещаем выделение текста */
+}
+
+label:has(.radioItem)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 26px;
+  height: 26px;
+  border-radius: var(--border-radius-size, 10px);
+  background-color: var(--main-input-color, #c9c6c691);
+  transition: border-color 0.3s;
+}
+
+label:has(.radioItem:checked)::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  width: 16px;
+  height: 16px;
+  outline: 1px solid var(--border-color, #0000005d);
+  border-radius: var(--border-radius-size, 10px);
+  background-color: var(--main-color, #42634a);
+  transition: background-color 0.3s;
+}

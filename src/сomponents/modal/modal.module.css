@@ -1,17 +1,5 @@
 @import '../../constants/variables.css';
 
-@media screen and (min-width: 550px) {
-  .modal {
-    min-width: 530px !important;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .modal {
-    min-width: clamp(19.6875rem, 0.9918rem + 93.4783vw, 33.125rem) !important;
-  }
-}
-
 .modal {
   display: flex;
   flex-direction: column;
@@ -61,4 +49,17 @@
 
 .overflow__hidden {
   overflow: hidden;
+}
+
+@media screen and (min-width: 550px) {
+  .modal {
+    min-width: 530px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .modal {
+    gap: 15px;
+    min-width: var(--min-width-size, 320px);
+  }
 }

@@ -1,18 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './modalForm.module.css';
 import clsx from 'clsx';
 import { useTodoValidation } from '../../hooks/useTodoValidation';
+import { RadioButton } from '../radioButton/RadioButton';
 
 export function ModalFormCreate({ onAdd, onClose }) {
   const { todo, errors, isFormValid, handleOnInputChange, setTodo } =
     useTodoValidation();
 
+  const [priority, setPriority] = useState('Не важно');
+
   const handleOnSubmit = () => {
     if (isFormValid) {
-      onAdd(todo);
+      onAdd({ ...todo, priority });
       setTodo({ title: '', description: '' });
+      setPriority('Не важно');
       onClose();
     }
+  };
+
+  const handlePriorityChange = (e) => {
+    setPriority(e.target.value);
   };
 
   return (
@@ -35,6 +43,7 @@ export function ModalFormCreate({ onAdd, onClose }) {
       <label>
         <textarea
           className={clsx(styles.input, errors.description ? styles.error : '')}
+          type="text"
           name="description"
           placeholder="Введите описание дела"
           onChange={handleOnInputChange}
@@ -48,6 +57,10 @@ export function ModalFormCreate({ onAdd, onClose }) {
           {todo.description.length} / 250
         </span>
       </label>
+      <RadioButton
+        priority={priority}
+        handlePriorityChange={handlePriorityChange}
+      />
       <button
         type="button"
         className={clsx(
