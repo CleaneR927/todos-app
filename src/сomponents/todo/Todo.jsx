@@ -11,7 +11,8 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
   const handleContainerClick = (event) => {
     if (
       event.target.closest(`.${styles.custom__checkbox}`) ||
-      event.target.closest(`input[type="checkbox"]`)
+      event.target.closest(`input[type="checkbox"]`) ||
+      event.target.closest(`.${styles.button__delete}`)
     ) {
       return;
     }
