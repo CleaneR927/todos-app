@@ -12,7 +12,7 @@
   align-items: center;
   padding: 10px 25px 10px 30px;
   border: 1px solid var(--border-color, #0000005d);
-  border-radius: 25px;
+  border-radius: 20px;
   background-color: var(--accent-bc-color, #42634a49);
   margin: 0 20px;
   box-shadow: 0px 4px 10px var(--accent-bc-color, #42634a49);

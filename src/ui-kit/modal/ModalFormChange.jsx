@@ -13,19 +13,16 @@ export function ModalFormChange({ todo, onEdit, onClose }) {
     setTodo
   } = useTodoValidation();
 
-  const [priority, setPriority] = useState('Не важно');
-
   useEffect(() => {
     setTodo({
       title: todo.title || '',
       description: todo.description || '',
-      priority: todo.priority || ''
+      priority: todo.priority || 'Не важно',
+      completed: todo.completed
     });
-    setPriority(todo.priority || 'Не важно');
   }, [todo, setTodo]);
 
   const handlePriorityChange = (e) => {
-    setPriority(e.target.value);
     setTodo((prevState) => ({
       ...prevState,
       priority: e.target.value
@@ -72,7 +69,7 @@ export function ModalFormChange({ todo, onEdit, onClose }) {
         </span>
       </label>
       <RadioButton
-        priority={priority}
+        priority={updatedTodo.priority}
         handlePriorityChange={handlePriorityChange}
       />
       <button
