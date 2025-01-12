@@ -1,0 +1,36 @@
+@import '../../constants/variables.css';
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  margin: -15px auto 0;
+}
+
+.searchInput {
+  position: relative;
+  caret-color: var(--main-color, #42634a);
+  padding-inline: 1.2em;
+  height: 2em;
+  background-color: var(--accent-bc-color, #c9c6c691);
+  border-radius: var(--border-radius-size, 15px);
+  border: 1px solid var(--border-color, #0000005d);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.searchInput:focus {
+  outline: 2px solid var(--main-color, #42634a);
+}
+
+.searchInput::placeholder {
+  color: var(--accent-color, #c9c6c6);
+  font-size: 1rem;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 0.5em;
+  cursor: pointer;
+}

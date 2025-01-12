@@ -9,10 +9,19 @@
   max-width: 800px;
 }
 
+.container:first-child {
+  gap: 0;
+}
+
 .title {
   font-size: 26px;
   align-self: center;
   margin: 1vh 0;
+  text-shadow:
+    -1px -1px 0 var(--accent-color, #c9c6c6),
+    1px -1px 0 var(--accent-color, #c9c6c6),
+    -1px 1px 0 var(--accent-color, #c9c6c6),
+    1px 1px 0 var(--accent-color, #c9c6c6);
 }
 
 @media screen and (max-width: 500px) {

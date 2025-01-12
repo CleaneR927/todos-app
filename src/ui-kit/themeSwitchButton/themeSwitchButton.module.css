@@ -1,4 +1,4 @@
-@import '../../../constants/variables.css';
+@import '../../constants/variables.css';
 
 .switch__container {
   position: absolute;
@@ -29,6 +29,10 @@
     transform 0.3s ease-in-out,
     background-color 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.switch__button:focus {
+  outline: 2px solid var(--main-color, #42634a);
 }
 
 .switch__button_active {

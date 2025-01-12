@@ -12,14 +12,30 @@ export const AddTodo = ({ openModal }) => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const handleClick = () => {
+    if (typeof openModal === 'function') {
+      openModal('create');
+    } else {
+      console.error('openModal is not a function');
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleClick();
+    }
+  };
+
   return (
     <button
       type="button"
       className={clsx(styles.button, isSmallScreen ? styles.small : '')}
-      onClick={() => openModal('create')}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
       aria-label="Добавить новое дело"
     >
-      {isSmallScreen ? <CgMathPlus /> : 'Добавить новое дело'}
+      {isSmallScreen ? <CgMathPlus /> : 'Add Todo'}
     </button>
   );
 };

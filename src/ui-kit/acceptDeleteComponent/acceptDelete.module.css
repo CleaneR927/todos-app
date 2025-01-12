@@ -1,0 +1,52 @@
+@import '../../constants/variables.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.title,
+.text {
+  color: var(--accent-bc-color, #c9c6c691);
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.title {
+  font-size: 26px;
+  min-height: 28px;
+  color: var(--accent-color, #c9c6c6);
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.button {
+  margin-inline: auto;
+  width: fit-content;
+  height: auto;
+  border-radius: 25px;
+  padding: 5px 25px;
+  background-color: var(--accent-color, #c9c6c6);
+  color: var(--main-color, #42634a);
+  transition: transform 0.3s ease;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
+
+.button__add:focus {
+  outline: 2px solid var(--border-color, #42634a);
+}
+
+.button__delete {
+  background-color: var(--checkbox-color, #a75151);
+  color: var(--accent-color, #c9c6c6);
+}

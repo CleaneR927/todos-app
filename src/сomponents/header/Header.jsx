@@ -1,7 +1,7 @@
 import styles from './header.module.css';
-import { ThemeSwitchButton } from './themeSwitchButton/ThemeSwitchButton';
 import { AddTodo } from '../../ui-kit/addTodo/AddTodo';
 import { HappyNewYear } from '../../ui-kit/happyNewYear/HappyNewYear';
+import { ThemeSwitchButton } from '../../ui-kit/themeSwitchButton/ThemeSwitchButton';
 
 export function HeaderPage({ openModal }) {
   return (

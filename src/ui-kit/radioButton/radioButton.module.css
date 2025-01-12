@@ -11,7 +11,11 @@
 }
 
 .radioItem {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
 }
 
 label:has(.radioItem) {
@@ -20,7 +24,7 @@ label:has(.radioItem) {
   position: relative;
   padding-left: 30px;
   cursor: pointer;
-  user-select: none; /* Запрещаем выделение текста */
+  user-select: none;
 }
 
 label:has(.radioItem)::before {
@@ -47,4 +51,8 @@ label:has(.radioItem:checked)::after {
   border-radius: var(--border-radius-size, 10px);
   background-color: var(--main-color, #42634a);
   transition: background-color 0.3s;
+}
+
+.radioItem:focus + label {
+  outline: 2px solid var(--border-color, #0000005d);
 }

@@ -1,13 +1,16 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { ModalOverlay } from './modalOverlay/ModalOverlay';
 import styles from './modal.module.css';
 import { CgCloseO } from 'react-icons/cg';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
 
 const modalContainer = document.getElementById('modal');
 
 export function Modal({ onClose, isAnimating, isExiting, children }) {
   const modalClass = `${styles.modal} ${isAnimating ? styles.modal_enter_active : ''} ${isExiting ? styles.modal_exit_active : ''}`;
+
+  const { trapRef } = useFocusTrap(true);
 
   useEffect(() => {
     const lockScroll = () => {
@@ -19,7 +22,9 @@ export function Modal({ onClose, isAnimating, isExiting, children }) {
     };
 
     const handleEsc = (e) => {
-      e.key === 'Escape' && onClose();
+      if (e.key === 'Escape') {
+        onClose();
+      }
     };
 
     document.addEventListener('keydown', handleEsc);
@@ -32,8 +37,13 @@ export function Modal({ onClose, isAnimating, isExiting, children }) {
 
   return ReactDOM.createPortal(
     <>
-      <div className={modalClass}>
-        <CgCloseO type="button" className={styles.button} onClick={onClose} />
+      <div ref={trapRef} className={modalClass} role="dialog" aria-modal="true">
+        <CgCloseO
+          type="button"
+          className={styles.button}
+          onClick={onClose}
+          aria-label="Закрыть модальное окно"
+        />
         {children}
       </div>
       <ModalOverlay handleOnCloseModal={onClose} />

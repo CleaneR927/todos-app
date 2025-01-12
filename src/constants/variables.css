@@ -12,6 +12,9 @@
   --validation-color: #9e3c3c;
   --odd-boll-color: #ff5733;
   --even-boll-color: #ffc300;
+  --bg-filter-color: #42634a15;
+
+  --bg-main-image: url('../accets/light-theme/mountains-and-sky.jpg');
 
   --rubber-todo-padding: clamp(0.9375rem, 0.1202rem + 3.8462vw, 1.5625rem);
   --title-font-size: clamp(1rem, 0.6731rem + 1.5385vw, 1.25rem);
@@ -36,6 +39,8 @@
     --validation-color: #9e3c3c;
     --odd-boll-color: #ff5733;
     --even-boll-color: #ffc300;
+    --bg-filter-color: #42634a15;
+    --bg-main-image: url('../accets/light-theme/mountains-and-sky.jpg');
   }
 }
 
@@ -54,6 +59,9 @@
     --validation-color: #9e3c3c;
     --odd-boll-color: #af54bb;
     --even-boll-color: #5db34c;
+    --bg-filter-color: #463b4615;
+
+    --bg-main-image: url('../accets/night-theme/night-tower.jpg');
   }
 }
 
@@ -71,6 +79,8 @@
   --validation-color: #9e3c3c;
   --odd-boll-color: #ff5733;
   --even-boll-color: #ffc300;
+  --bg-filter-color: #42634a15;
+  --bg-main-image: url('../accets/light-theme/mountains-and-sky.jpg');
 }
 
 [data-theme='dark'] {
@@ -87,4 +97,7 @@
   --validation-color: #9e3c3c;
   --odd-boll-color: #af54bb;
   --even-boll-color: #5db34c;
+  --bg-filter-color: #463b4615;
+
+  --bg-main-image: url('../accets/night-theme/night-landscape.jpg');
 }

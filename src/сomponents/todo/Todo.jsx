@@ -9,34 +9,42 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
   }
 
   const handleContainerClick = (event) => {
-    if (
+    const isCheckboxOrDeleteButton =
       event.target.closest(`.${styles.custom__checkbox}`) ||
       event.target.closest(`input[type="checkbox"]`) ||
-      event.target.closest(`.${styles.button__delete}`)
-    ) {
-      return;
+      event.target.closest(`.${styles.button__delete}`);
+
+    if (!isCheckboxOrDeleteButton) {
+      handleOnEdit();
     }
-    handleOnEdit();
   };
 
-  const hasDescription = !!todo.description;
+  const handleKeyDown = (event, action) => {
+    if (event.key === 'Enter') {
+      action();
+    }
+    event.stopPropagation();
+  };
+
+  const hasDescription = Boolean(todo.description);
 
   return (
     <div
-      className={clsx(
-        styles.item,
-        !hasDescription ? styles['no-description'] : ''
-      )}
+      className={clsx(styles.item, !hasDescription && styles['no-description'])}
       onClick={handleContainerClick}
+      onKeyDown={(event) => handleKeyDown(event, handleOnEdit)}
       aria-label={`Редактировать задачу ${todo.title}`}
+      role="button"
+      tabIndex={0}
     >
       <h3 className={styles.title}>{todo.title}</h3>
       <p className={styles.description}>{todo.description}</p>
+      <p className={styles.date}>
+        Создано: {new Date(todo.createdAt).toLocaleDateString()}
+      </p>
       <div className={styles.priority__container}>
-        {todo.priority === 'Важно' ? (
+        {todo.priority === 'Важно' && (
           <FaStar className={styles.priority__icon} />
-        ) : (
-          ''
         )}
       </div>
       <label htmlFor={todo.id} className={styles.custom__checkbox}>
@@ -44,12 +52,18 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
           type="checkbox"
           id={todo.id}
           checked={todo.completed}
-          onChange={() => setTimeout(() => handleOnCheck(todo.id), 200)}
+          onChange={() => handleOnCheck(todo.id)}
+        />
+        <span
+          className={styles.custom__checkbox_icon}
+          onKeyDown={(e) => {
+            handleKeyDown(e, () => handleOnCheck(todo.id));
+          }}
           aria-label={
             todo.completed ? 'Отметить незавершенным' : 'Отметить завершенным'
           }
-        />
-        <span className={styles.custom__checkbox_icon}>
+          tabIndex={0}
+        >
           <CgCheck />
         </span>
         <span className={styles.visuale_hidden}>
@@ -60,12 +74,16 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
         type="button"
         className={styles.button__delete}
         id={todo.id}
-        onClick={() => {
-          setTimeout(() => {
+        onClick={() => handleOnDelete(todo.id)}
+        onKeyDown={(e) => {
+          if (e.key === ' ') {
             handleOnDelete(todo.id);
-          }, 200);
+            e.preventDefault();
+          }
+          handleKeyDown(e, () => handleOnDelete(todo.id));
         }}
-        aria-label="Удалить задачу"
+        aria-label={`Удалить задачу ${todo.title}`}
+        tabIndex={0}
       >
         X
       </CgCloseO>

@@ -25,6 +25,7 @@
   color: var(--accent-color, #c9c6c6);
   font-size: 40px;
   padding: 5px 10px;
+  cursor: default;
 }
 
 @media screen and (max-width: 500px) {

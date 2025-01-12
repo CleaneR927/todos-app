@@ -3,8 +3,9 @@ import styles from './radioButton.module.css';
 export const RadioButton = ({ priority, handlePriorityChange }) => {
   return (
     <fieldset className={styles.radioContainer}>
-      <label>
+      <label htmlFor="priority-important">
         <input
+          id="priority-important"
           className={styles.radioItem}
           type="radio"
           value="Важно"
@@ -13,8 +14,9 @@ export const RadioButton = ({ priority, handlePriorityChange }) => {
         />
         Важно
       </label>
-      <label>
+      <label htmlFor="priority-not-important">
         <input
+          id="priority-not-important"
           className={styles.radioItem}
           type="radio"
           value="Не важно"
