@@ -9,9 +9,8 @@
 
 .button {
   grid-row: 2 / 3;
-  justify-self: center;
   width: 8rem;
-  height: 30px;
+  height: 32px;
   font-size: 16px;
   border-radius: 25px;
   background-color: var(--accent-bc-color, #42634a49);

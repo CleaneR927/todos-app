@@ -123,6 +123,11 @@ export function TodosList() {
     );
   }, [todos, searchTerm]);
 
+  const handleSearchChange = (term) => {
+    setSearchTerm(term);
+    setCurrentPage(1);
+  };
+
   const paginatedTodos = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredTodos.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -132,17 +137,24 @@ export function TodosList() {
     <div className={styles.container}>
       <HeaderPage openModal={handleOnOpenModal} />
       <h2 className={styles.title}>Список моих дел</h2>
-      <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <SearchComponent
+        searchTerm={searchTerm}
+        setSearchTerm={handleSearchChange}
+      />
       <div className={styles.todosList}>
-        {paginatedTodos.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            handleOnCheck={handleOnCheck}
-            handleOnDelete={() => handleOnOpenModal('delete', todo)}
-            handleOnEdit={() => handleOnOpenModal('change', todo)}
-          />
-        ))}
+        {paginatedTodos.length > 0 ? (
+          paginatedTodos.map((todo) => (
+            <Todo
+              key={todo.id}
+              todo={todo}
+              handleOnCheck={handleOnCheck}
+              handleOnDelete={() => handleOnOpenModal('delete', todo)}
+              handleOnEdit={() => handleOnOpenModal('change', todo)}
+            />
+          ))
+        ) : (
+          <p className={styles.noResults}>Нет результатов по вашему запросу.</p>
+        )}
       </div>
       <Pagination
         currentPage={currentPage}
