@@ -7,10 +7,20 @@
   flex-grow: 1;
   margin: 70px auto 0;
   max-width: 800px;
+  height: 100%;
 }
 
 .container:first-child {
   gap: 0;
+}
+
+.todosList {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+  gap: 15px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 .title {

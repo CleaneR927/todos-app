@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,18 +9,22 @@ import { TodoForm } from '../../ui-kit/todoForm/TodoForm';
 import { SearchComponent } from '../../ui-kit/searchComponent/SearchComponent';
 import { AcceptDeleteComponent } from '../../ui-kit/acceptDeleteComponent/AcceptDeleteComponent';
 import styles from './todosList.module.css';
+import Pagination from '../../ui-kit/Pagination/Pagination';
+
+const ITEMS_PER_PAGE = 5;
 
 export function TodosList() {
   const [todos, setTodos] = useState(() => {
     const localSorage = localStorage.getItem('todos');
-    let parsedTodos = [];
     try {
-      parsedTodos = localSorage ? JSON.parse(localSorage) : [];
+      return localSorage ? JSON.parse(localSorage) : [];
     } catch (error) {
       console.error('Ошибка при парсинге todos из localStorage:', error);
+      return [];
     }
-    return Array.isArray(parsedTodos) ? parsedTodos : [];
   });
+
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -33,15 +37,29 @@ export function TodosList() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  const handleOnCheck = (id) => {
-    setTodos(
+  const totalPages = Math.ceil(todos.length / ITEMS_PER_PAGE);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
+
+  const handleOnCheck = useCallback((id) => {
+    setTodos((todos) =>
       todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
-  };
+  }, []);
 
-  const handleOnAdd = (newTodo) => {
+  const handleOnAdd = useCallback((newTodo) => {
     setTodos((prevTodos) => [
       {
         id: uuidv4(),
@@ -51,22 +69,21 @@ export function TodosList() {
       },
       ...prevTodos
     ]);
-  };
+  }, []);
 
-  const handleOnEdit = (updatedTodo) => {
+  const handleOnEdit = useCallback((updatedTodo) => {
     setTodos((prevTodos) =>
-      prevTodos.map((todo) => {
-        if (todo.id === updatedTodo.id) {
-          return { ...todo, ...updatedTodo, createdAt: todo.createdAt };
-        }
-        return todo;
-      })
+      prevTodos.map((todo) =>
+        todo.id === updatedTodo.id
+          ? { ...todo, ...updatedTodo, createdAt: todo.createdAt }
+          : todo
+      )
     );
-  };
+  }, []);
 
-  const handleOnDelete = (id) => {
+  const handleOnDelete = useCallback((id) => {
     try {
-      setTodos(todos.filter((todo) => todo.id !== id));
+      setTodos((todos) => todos.filter((todo) => todo.id !== id));
       setIsDeleteConfirmation(false);
       setIsModalOpen(false);
       toast.success('Задача успешно удалена!');
@@ -74,44 +91,31 @@ export function TodosList() {
       console.error('Ошибка при удалении задачи:', error);
       toast.error('Не удалось удалить задачу. Пожалуйста, попробуйте еще раз.');
     }
-  };
+  }, []);
 
-  const handleOnOpenModal = (action, todo = null) => {
-    if (isExiting) return;
-    if (action !== 'delete') {
-      setIsDeleteConfirmation(false);
-    }
-    if (action === 'delete') {
-      setIsDeleteConfirmation(true);
-      setCurrentTodo(todo);
-    } else {
-      setFormAction(action);
-      setCurrentTodo(todo);
-    }
-    setIsModalOpen(true);
-    setIsExiting(false);
-    setTimeout(() => setIsAnimating(true), 0);
-  };
+  const handleOnOpenModal = useCallback(
+    (action, todo = null) => {
+      if (!isExiting) {
+        setIsDeleteConfirmation(action === 'delete');
+        setCurrentTodo(todo);
+        setFormAction(action === 'delete' ? 'delete' : action);
+        setIsModalOpen(true);
+        setIsExiting(false);
+        setTimeout(() => setIsAnimating(true), 0);
+      }
+    },
+    [isExiting]
+  );
 
-  const handleOnCloseModal = () => {
-    if (isDeleteConfirmation) {
-      setIsExiting(true);
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setCurrentTodo(null);
-        setIsExiting(false);
-        setIsAnimating(false);
-      }, 200);
-    } else {
-      setIsExiting(true);
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setCurrentTodo(null);
-        setIsExiting(false);
-        setIsAnimating(false);
-      }, 200);
-    }
-  };
+  const handleOnCloseModal = useCallback(() => {
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setCurrentTodo(null);
+      setIsExiting(false);
+      setIsAnimating(false);
+    }, 200);
+  }, []);
 
   const filteredTodos = useMemo(() => {
     return todos.filter((todo) =>
@@ -119,20 +123,33 @@ export function TodosList() {
     );
   }, [todos, searchTerm]);
 
+  const paginatedTodos = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredTodos.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredTodos, currentPage]);
+
   return (
     <div className={styles.container}>
       <HeaderPage openModal={handleOnOpenModal} />
       <h2 className={styles.title}>Список моих дел</h2>
       <SearchComponent searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      {filteredTodos.map((todo) => (
-        <Todo
-          key={todo.id}
-          todo={todo}
-          handleOnCheck={handleOnCheck}
-          handleOnDelete={() => handleOnOpenModal('delete', todo)}
-          handleOnEdit={() => handleOnOpenModal('change', todo)}
-        />
-      ))}
+      <div className={styles.todosList}>
+        {paginatedTodos.map((todo) => (
+          <Todo
+            key={todo.id}
+            todo={todo}
+            handleOnCheck={handleOnCheck}
+            handleOnDelete={() => handleOnOpenModal('delete', todo)}
+            handleOnEdit={() => handleOnOpenModal('change', todo)}
+          />
+        ))}
+      </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onNextPage={handleNextPage}
+        onPreviousPage={handlePreviousPage}
+      />
       {isModalOpen && (
         <Modal
           onClose={handleOnCloseModal}

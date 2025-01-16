@@ -9,7 +9,7 @@ export function HeaderPage({ openModal }) {
       <h2 className={styles.title}>TodosApp</h2>
       <AddTodo openModal={openModal} />
       <ThemeSwitchButton />
-      <HappyNewYear />
+      {/* <HappyNewYear /> */}
     </header>
   );
 }

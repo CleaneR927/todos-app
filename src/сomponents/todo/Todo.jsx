@@ -15,15 +15,15 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
       event.target.closest(`.${styles.button__delete}`);
 
     if (!isCheckboxOrDeleteButton) {
-      handleOnEdit();
+      handleOnEdit(todo);
     }
   };
 
   const handleKeyDown = (event, action) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.key === ' ') {
       action();
+      event.stopPropagation();
     }
-    event.stopPropagation();
   };
 
   const hasDescription = Boolean(todo.description);
@@ -75,13 +75,7 @@ export function Todo({ todo, handleOnCheck, handleOnDelete, handleOnEdit }) {
         className={styles.button__delete}
         id={todo.id}
         onClick={() => handleOnDelete(todo.id)}
-        onKeyDown={(e) => {
-          if (e.key === ' ') {
-            handleOnDelete(todo.id);
-            e.preventDefault();
-          }
-          handleKeyDown(e, () => handleOnDelete(todo.id));
-        }}
+        onKeyDown={(e) => handleKeyDown(e, () => handleOnDelete(todo.id))}
         aria-label={`Удалить задачу ${todo.title}`}
         tabIndex={0}
       >
