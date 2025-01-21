@@ -1,53 +1,41 @@
 import globals from 'globals';
-import pluginJs from '@eslint/js';
 import pluginReact from 'eslint-plugin-react';
+import pluginJsxA11y from 'eslint-plugin-jsx-a11y';
+import pluginPrettier from 'eslint-plugin-prettier';
+import babelEslintParser from '@babel/eslint-parser';
 
-/** @type {import('eslint').Linter.Config[]} */
+/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  { files: ['**/*.{js,mjs,cjs,jsx}'] },
-  { languageOptions: { globals: globals.browser } },
-  pluginJs.configs.recommended,
-  pluginReact.configs.flat.recommended,
   {
-    env: {
-      browser: true,
-      es2021: true
-    },
-    extends: [
-      'eslint:recommended',
-      'plugin:react/recommended',
-      'plugin:react/jsx-runtime',
-      'plugin:jsx-a11y/recommended',
-      'plugin:prettier/recommended'
-    ],
-    overrides: [
-      {
-        env: {
-          node: true
-        },
-        files: ['.eslintrc.{js,cjs}'],
-        parserOptions: {
-          sourceType: 'script'
-        }
+    files: ['**/*.{js,jsx,mjs,cjs}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser
+      },
+      parser: babelEslintParser, // Используйте импортированный объект парсера
+      parserOptions: {
+        ecmaVersion: 12,
+        sourceType: 'module'
       }
-    ],
-    parserOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module'
+    }
+  },
+  {
+    plugins: {
+      react: pluginReact,
+      'jsx-a11y': pluginJsxA11y,
+      prettier: pluginPrettier
     },
-    plugins: ['react'],
     rules: {
       'no-var': 'error',
       'prefer-const': 'warn',
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
-      'prettier/prettier': [
-        'warn',
-        {
-          endOfLine: 'auto'
-        }
-      ]
+      'prettier/prettier': ['warn', { endOfLine: 'auto' }]
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
     }
   }
 ];
-

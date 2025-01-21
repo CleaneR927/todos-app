@@ -9,7 +9,7 @@ import { TodoForm } from '../../ui-kit/todoForm/TodoForm';
 import { SearchComponent } from '../../ui-kit/searchComponent/SearchComponent';
 import { AcceptDeleteComponent } from '../../ui-kit/acceptDeleteComponent/AcceptDeleteComponent';
 import styles from './todosList.module.css';
-import Pagination from '../../ui-kit/Pagination/Pagination';
+import Pagination from '../../ui-kit/pagination/Pagination';
 
 const ITEMS_PER_PAGE = 5;
 

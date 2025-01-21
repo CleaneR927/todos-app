@@ -1,5 +1,5 @@
 import { HeaderPage } from './header/Header';
-import { TodosList } from './todoLists/TodosList';
+import { TodosList } from './todosList/TodosList';
 import { Footer } from './footer/Footer';
 import '../index.css';
 import styles from './app.module.css';
